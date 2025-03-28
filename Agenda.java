@@ -26,40 +26,56 @@ public class Agenda {
                 switch(opcao){
                     /* Adicionar contato */
                     case 1:
+                        while(true) {
+                            System.out.print("Informe nome: ");
+                            String nome = input.nextLine();
+                            System.out.print("Informe telefone: ");
+                            String telefone = input.nextLine();
+                            if(nome.equals("") || telefone.equals("")) {
+                                System.out.println("Um dos campos foi inserido sem nenhum valor!");
+                            }else {
+                                contato[numContatos] = new Contato(nome, telefone);
 
-                        System.out.print("Informe nome: ");
-                        String nome = input.nextLine();
-                        System.out.print("Informe telefone: ");
-                        String telefone = input.nextLine();
-                        contato[numContatos] = new Contato(nome, telefone);
-
-                        System.out.println("Contato cadastrado com sucesso!\n");
-
-                        numContatos++;
-
+                                System.out.println("Contato cadastrado com sucesso!\n");
+                                numContatos++;
+                                break;
+                            }
+                        }
                         break;
 
                     /* Buscar contato */
                     case 2:
                         System.out.println("Digite o nome do contato:");
                         String nomeBuscar = input.nextLine();
-                        buscarContato(nomeBuscar, contato);
+                        if(nomeBuscar.equals("")){
+                            System.out.println(" Nenhum nome de contato digitado!");
+                        }else{
+                            buscarContato(nomeBuscar, contato);
+                        }
+
                         break;
 
                     /* Editar contato */
                     case 3:
                         System.out.println("Digite o nome do contato que deseja editar:");
                         String nomeEditar = input.nextLine();
-                        editarContato(nomeEditar, contato);
-
+                        if(nomeEditar.equals("")){
+                            System.out.println(" Nenhum nome de contato digitado!");
+                        }else{
+                            editarContato(nomeEditar, contato);
+                        }
                         break;
 
                     /* Excluir contato */
                     case 4:
                         System.out.println("Digite o nome do contato que deseja excluir:");
                         String nomeExcluir = input.nextLine();
-                        excluirContato(nomeExcluir, contato, numContatos);
-                        numContatos--;
+                        if(nomeExcluir.equals("")){
+                            System.out.println(" Nenhum nome de contato digitado!");
+                        }else {
+                            excluirContato(nomeExcluir, contato, numContatos);
+                            numContatos--;
+                        }
                         break;
 
                     /* Listar contatos */
@@ -76,6 +92,7 @@ public class Agenda {
                     /* Sair */
                     case 6:
                         input.close();
+                        System.exit(0);
                         break;
 
                     default:
@@ -103,9 +120,16 @@ public class Agenda {
         Scanner input = new Scanner(System.in);
         for(Contato contatoTemp : contatos){
             if(contatoTemp.getNome().equals(nomeBuscar)){
+                while(true){
                 System.out.println("Digite o novo numero para o contato: ");
                 String novoNumero = input.nextLine();
-                contatoTemp.setNumero(novoNumero);
+                if(novoNumero.equals("")){
+                    System.out.println(" Nenhum numero para contato digitado!");
+                }else{
+                    contatoTemp.setNumero(novoNumero);
+                    break;
+                }
+                }
                 return;
             }
         }
